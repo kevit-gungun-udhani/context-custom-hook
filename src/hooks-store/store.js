@@ -4,7 +4,7 @@ let gloabalState = {};
 let listeners = [];
 let actions = {};
 
-const useStore = () => {
+export const useStore = () => {
     const setState = useState(gloabalState)[1];
 
     const dispatch = (actionIdentifier) => {
@@ -23,4 +23,14 @@ const useStore = () => {
             listeners = listeners.filter(li => li !== setState) 
         }
     }, [setState]);
+
+    return [gloabalState, dispatch]
 }
+
+export const initStore = (userActions, initialState) => {
+    if(initialState){
+        gloabalState = {...gloabalState, ...initialState}
+    }
+    actions = {...actions, ...userActions}
+}
+
