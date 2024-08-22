@@ -7,8 +7,8 @@ let actions = {};
 export const useStore = () => {
     const setState = useState(gloabalState)[1];
 
-    const dispatch = (actionIdentifier) => {
-        const newState = actions[actionIdentifier](gloabalState);
+    const dispatch = (actionIdentifier, payload) => {
+        const newState = actions[actionIdentifier](gloabalState, payload);
         gloabalState = {...gloabalState, ...newState};
 
         for(const listener of listeners){
